@@ -10,6 +10,23 @@ class Api::BooksController < ApplicationController
     render json: @book
   end
 
+  def create
+    @book = @author.books.new(book_params)
+    if @book.save
+      render json: @book
+    else
+      render json: @book.errors.full_messages, status: 422
+    end
+  end
+
+  def update
+    if @book.update(book_params)
+      render json: @book
+    else
+      render json: @book.errors.full_messages, status: 422
+    end
+  end
+
   private
   
   def set_author
@@ -18,5 +35,9 @@ class Api::BooksController < ApplicationController
 
   def set_book
     @book = @author.books.find(params[:id])
+  end
+
+  def book_params
+    params.require(:book).permit(:name, :genre)
   end
 end

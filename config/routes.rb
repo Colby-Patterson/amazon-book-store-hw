@@ -13,5 +13,7 @@ Rails.application.routes.draw do
 
     get '/authors/:author_id/books', to: 'books#index'
     get '/authors/:author_id/books/:id', to: 'books#show'
+    post '/authors/:author_id/books', to: 'books#create'
+    put '/authors/:author_id/books/:id', to: 'books#update'
   end
 end
