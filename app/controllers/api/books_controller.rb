@@ -27,6 +27,10 @@ class Api::BooksController < ApplicationController
     end
   end
 
+  def destroy
+    render json: @book.destroy
+  end
+
   private
   
   def set_author
